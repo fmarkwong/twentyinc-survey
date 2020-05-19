@@ -27,7 +27,7 @@ Repo.insert! %User{
 quiz1 = Repo.insert! %Quiz{
   title: "Quiz #1",
   description: "The first quiz",
-  image_url: "https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg"
+  image_url: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/800px-Flag_of_the_United_States.svg.png"
 }
 
 question = Repo.insert! %Question{
@@ -59,7 +59,7 @@ end)
 quiz2 = Repo.insert! %Quiz{
   title: "Quiz #2",
   description: "The second quiz",
-  image_url: "https://commons.wikimedia.org/wiki/File:Flag_of_the_United_States.svg#/media/File:Flag_of_the_United_States.svg"
+  image_url: "https://upload.wikimedia.org/wikipedia/en/a/ae/Flag_of_the_United_Kingdom.svg"
 }
 
 question = Repo.insert! %Question{
