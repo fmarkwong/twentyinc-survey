@@ -6,6 +6,7 @@ defmodule Survey.Questionnaire.Quiz do
     field :description, :string
     field :image_url, :string
     field :title, :string
+    has_many :questions, Survey.Questionnaire.Question
 
     timestamps()
   end

@@ -65,4 +65,63 @@ defmodule Survey.QuestionnaireTest do
       assert %Ecto.Changeset{} = Questionnaire.change_quiz(quiz)
     end
   end
+
+  describe "questions" do
+    alias Survey.Questionnaire.Question
+
+    @valid_attrs %{text: "some text"}
+    @update_attrs %{text: "some updated text"}
+    @invalid_attrs %{text: nil}
+
+    def question_fixture(attrs \\ %{}) do
+      {:ok, question} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Questionnaire.create_question()
+
+      question
+    end
+
+    test "list_questions/0 returns all questions" do
+      question = question_fixture()
+      assert Questionnaire.list_questions() == [question]
+    end
+
+    test "get_question!/1 returns the question with given id" do
+      question = question_fixture()
+      assert Questionnaire.get_question!(question.id) == question
+    end
+
+    test "create_question/1 with valid data creates a question" do
+      assert {:ok, %Question{} = question} = Questionnaire.create_question(@valid_attrs)
+      assert question.text == "some text"
+    end
+
+    test "create_question/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Questionnaire.create_question(@invalid_attrs)
+    end
+
+    test "update_question/2 with valid data updates the question" do
+      question = question_fixture()
+      assert {:ok, %Question{} = question} = Questionnaire.update_question(question, @update_attrs)
+      assert question.text == "some updated text"
+    end
+
+    test "update_question/2 with invalid data returns error changeset" do
+      question = question_fixture()
+      assert {:error, %Ecto.Changeset{}} = Questionnaire.update_question(question, @invalid_attrs)
+      assert question == Questionnaire.get_question!(question.id)
+    end
+
+    test "delete_question/1 deletes the question" do
+      question = question_fixture()
+      assert {:ok, %Question{}} = Questionnaire.delete_question(question)
+      assert_raise Ecto.NoResultsError, fn -> Questionnaire.get_question!(question.id) end
+    end
+
+    test "change_question/1 returns a question changeset" do
+      question = question_fixture()
+      assert %Ecto.Changeset{} = Questionnaire.change_question(question)
+    end
+  end
 end

@@ -17,7 +17,8 @@ defmodule SurveyWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "quizzes", QuizController, :index
+    get "/users", UserController, :index
+    get "/quizzes", QuizController, :index
   end
 
   # Other scopes may use custom stacks.
