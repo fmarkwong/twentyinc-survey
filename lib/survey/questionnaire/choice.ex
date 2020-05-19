@@ -4,6 +4,7 @@ defmodule Survey.Questionnaire.Choice do
 
   schema "choices" do
     field :text, :string
+    has_many :answers, Survey.Questionnaire.Answer
     belongs_to :question, Survey.Questionnaire.Question
 
     timestamps()
