@@ -5,7 +5,8 @@ defmodule SurveyWeb.QuizController do
   alias Survey.Questionnaire.Quiz
 
   def index(conn, _params) do
-    quizzes = Questionnaire.list_quizzes()
+    current_user_id = 1 #harccoding this.  Normally would get it from session in conn
+    quizzes = Questionnaire.list_quizzes_for_user(current_user_id)
     render(conn, "index.html", quizzes: quizzes)
   end
 

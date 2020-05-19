@@ -21,6 +21,12 @@ defmodule Survey.Questionnaire do
     Repo.all(Quiz)
   end
 
+  def list_quizzes_for_user(user_id) do
+    Quiz
+    |> Quiz.not_completed_for(user_id)
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single quiz.
 
