@@ -124,4 +124,63 @@ defmodule Survey.QuestionnaireTest do
       assert %Ecto.Changeset{} = Questionnaire.change_question(question)
     end
   end
+
+  describe "choices" do
+    alias Survey.Questionnaire.Choice
+
+    @valid_attrs %{text: "some text"}
+    @update_attrs %{text: "some updated text"}
+    @invalid_attrs %{text: nil}
+
+    def choice_fixture(attrs \\ %{}) do
+      {:ok, choice} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Questionnaire.create_choice()
+
+      choice
+    end
+
+    test "list_choices/0 returns all choices" do
+      choice = choice_fixture()
+      assert Questionnaire.list_choices() == [choice]
+    end
+
+    test "get_choice!/1 returns the choice with given id" do
+      choice = choice_fixture()
+      assert Questionnaire.get_choice!(choice.id) == choice
+    end
+
+    test "create_choice/1 with valid data creates a choice" do
+      assert {:ok, %Choice{} = choice} = Questionnaire.create_choice(@valid_attrs)
+      assert choice.text == "some text"
+    end
+
+    test "create_choice/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Questionnaire.create_choice(@invalid_attrs)
+    end
+
+    test "update_choice/2 with valid data updates the choice" do
+      choice = choice_fixture()
+      assert {:ok, %Choice{} = choice} = Questionnaire.update_choice(choice, @update_attrs)
+      assert choice.text == "some updated text"
+    end
+
+    test "update_choice/2 with invalid data returns error changeset" do
+      choice = choice_fixture()
+      assert {:error, %Ecto.Changeset{}} = Questionnaire.update_choice(choice, @invalid_attrs)
+      assert choice == Questionnaire.get_choice!(choice.id)
+    end
+
+    test "delete_choice/1 deletes the choice" do
+      choice = choice_fixture()
+      assert {:ok, %Choice{}} = Questionnaire.delete_choice(choice)
+      assert_raise Ecto.NoResultsError, fn -> Questionnaire.get_choice!(choice.id) end
+    end
+
+    test "change_choice/1 returns a choice changeset" do
+      choice = choice_fixture()
+      assert %Ecto.Changeset{} = Questionnaire.change_choice(choice)
+    end
+  end
 end
