@@ -2,7 +2,7 @@
 
 <table>
   <thead>
-    <h3>Please select a user to login as</h3>
+    <h3>Please select a user to login as to the Survey App</h3>
   </thead>
   <tbody>
 <%= for user <- @users do %>
