@@ -1,6 +1,6 @@
 <h1><%= @question.text %></h1>
 
-<%= form_for @conn, Routes.quiz_path(@conn, :submit_answer, @question), fn f -> %>
+<%= form_for @conn, Routes.quiz_path(@conn, :submit_answer, @question.quiz), fn f -> %>
   <div class="radio-container">
 <%= for choice <- @question.choices do %>
     <label class="radio-label" for="choice_id_<%= choice.id %>">

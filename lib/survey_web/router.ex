@@ -16,12 +16,12 @@ defmodule SurveyWeb.Router do
   scope "/", SurveyWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    # get "/", PageController, :index
     get "/users", UserController, :index
-    get "/quizzes", QuizController, :index
-    get "/start/:id", QuizController, :start
-    get "/next/:quiz_id", QuizController, :next_question
-    post "/sa/:quiz_id", QuizController, :submit_answer
+    get "/", QuizController, :index
+    get "/start-quiz-page/:id", QuizController, :start
+    get "/next-queston-page/:quiz_id", QuizController, :next_question
+    post "/submit-answer/:quiz_id", QuizController, :submit_answer
   end
 
   # Other scopes may use custom stacks.
