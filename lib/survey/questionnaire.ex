@@ -10,7 +10,8 @@ defmodule Survey.Questionnaire do
 
   @doc """
   Returns the list of quizzes
-  that have been been compoleted
+  that have not been completed
+  for a user
 
   ## Examples
   iex> list_quizzes_for(user.id)
@@ -18,7 +19,7 @@ defmodule Survey.Questionnaire do
 
   """
 
-  def list_quizzes_for_user(user_id) do
+  def list_not_completed_quizzes_for_user(user_id) do
     Quiz
     |> Quiz.not_completed_for(user_id)
     |> Repo.all()

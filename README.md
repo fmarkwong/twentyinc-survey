@@ -65,7 +65,7 @@ After logging in, you're redirected to the quiz listing page. This will list the
 
 The controller action for the quiz listing page is `lib/survey_web/controllers/quiz_controller.ex#index`
 
-`Questionnaire.list_quizzes_for_user/1` calls a query to figure out which quizzes are unfinished for the current user. That query is in `lib/survey/questionair/quiz.ex#not_completed_for/2`. Those quizzes are listed in the quiz listing page.
+`Questionnaire.list_not_completed_quizzes_for_user/1` calls a query to figure out which quizzes are unfinished for the current user. That query is in `lib/survey/questionair/quiz.ex#not_completed_for/2`. Those quizzes are listed in the quiz listing page.
 
 Once you click on a quiz, you're forwarded to a start page. When you click the start link, you're directed to `quiz_controller.ex#next_question`. This calls the `Question.next_unanswered_question_for/3` query in `lib/survey/questionnaire/question.ex` to grab the next unanswered question for this quiz and user. 
 

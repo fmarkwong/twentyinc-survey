@@ -23,11 +23,12 @@ defmodule Survey.Questionnaire.Question do
       join: choice in assoc(question, :choices),
       left_join: answer in assoc(choice, :answers),
       where: answer.user_id == ^user_id,
-      or_where: is_nil(answer.id), 
+      or_where: is_nil(answer.id),
       where: question.quiz_id == ^quiz_id,
       group_by: question.id,
       having: count(answer.id) == 0,
       limit: 1
-      # select: %{answer_count: count(answer.id), quiz_id: question.quiz_id, question_id: question.id}
+
+    # select: %{answer_count: count(answer.id), quiz_id: question.quiz_id, question_id: question.id}
   end
 end

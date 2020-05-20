@@ -9,6 +9,5 @@ defmodule Survey.Repo.Migrations.CreateQuizzes do
 
       timestamps()
     end
-
   end
 end

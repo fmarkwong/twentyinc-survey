@@ -9,7 +9,7 @@ defmodule SurveyWeb.QuizController do
   def index(conn, _params) do
     current_user = current_user(conn)
 
-    quizzes = Questionnaire.list_quizzes_for_user(current_user.id)
+    quizzes = Questionnaire.list_not_completed_quizzes_for_user(current_user.id)
     render(conn, "index.html", quizzes: quizzes, current_user: current_user)
   end
 
@@ -18,15 +18,17 @@ defmodule SurveyWeb.QuizController do
   end
 
   def next_question(conn, %{"quiz_id" => quiz_id}) do
-    question = Question.next_unanswered_question_for(Question, quiz_id, current_user(conn).id) 
+    question =
+      Question.next_unanswered_question_for(Question, quiz_id, current_user(conn).id)
       |> Repo.one()
       |> Repo.preload([:choices, :quiz])
 
     case question do
       %Question{} ->
-        render(conn, "next_question.html", question: question) 
+        render(conn, "next-question.html", question: question)
+
       nil ->
-        render(conn, "end-quiz-page.html") 
+        render(conn, "end-quiz-page.html")
     end
   end
 

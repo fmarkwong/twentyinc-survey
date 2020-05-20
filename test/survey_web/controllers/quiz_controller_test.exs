@@ -3,8 +3,16 @@ defmodule SurveyWeb.QuizControllerTest do
 
   alias Survey.Questionnaire
 
-  @create_attrs %{description: "some description", image_url: "some image_url", title: "some title"}
-  @update_attrs %{description: "some updated description", image_url: "some updated image_url", title: "some updated title"}
+  @create_attrs %{
+    description: "some description",
+    image_url: "some image_url",
+    title: "some title"
+  }
+  @update_attrs %{
+    description: "some updated description",
+    image_url: "some updated image_url",
+    title: "some updated title"
+  }
   @invalid_attrs %{description: nil, image_url: nil, title: nil}
 
   def fixture(:quiz) do
@@ -75,6 +83,7 @@ defmodule SurveyWeb.QuizControllerTest do
     test "deletes chosen quiz", %{conn: conn, quiz: quiz} do
       conn = delete(conn, Routes.quiz_path(conn, :delete, quiz))
       assert redirected_to(conn) == Routes.quiz_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.quiz_path(conn, :show, quiz))
       end

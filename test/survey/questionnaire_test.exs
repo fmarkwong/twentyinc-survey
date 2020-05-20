@@ -6,8 +6,16 @@ defmodule Survey.QuestionnaireTest do
   describe "quizzes" do
     alias Survey.Questionnaire.Quiz
 
-    @valid_attrs %{description: "some description", image_url: "some image_url", title: "some title"}
-    @update_attrs %{description: "some updated description", image_url: "some updated image_url", title: "some updated title"}
+    @valid_attrs %{
+      description: "some description",
+      image_url: "some image_url",
+      title: "some title"
+    }
+    @update_attrs %{
+      description: "some updated description",
+      image_url: "some updated image_url",
+      title: "some updated title"
+    }
     @invalid_attrs %{description: nil, image_url: nil, title: nil}
 
     def quiz_fixture(attrs \\ %{}) do
@@ -103,7 +111,10 @@ defmodule Survey.QuestionnaireTest do
 
     test "update_question/2 with valid data updates the question" do
       question = question_fixture()
-      assert {:ok, %Question{} = question} = Questionnaire.update_question(question, @update_attrs)
+
+      assert {:ok, %Question{} = question} =
+               Questionnaire.update_question(question, @update_attrs)
+
       assert question.text == "some updated text"
     end
 
