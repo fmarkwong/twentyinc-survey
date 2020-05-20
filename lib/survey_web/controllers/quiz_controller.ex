@@ -40,6 +40,12 @@ defmodule SurveyWeb.QuizController do
     redirect(conn, to: Routes.quiz_path(conn, :next_question, quiz_id))
   end
 
+  def submit_answer(conn, %{"quiz_id" => quiz_id}) do
+    conn
+    |> put_flash(:error, "Please make a selection")
+    |> redirect(to: Routes.quiz_path(conn, :next_question, quiz_id))
+  end
+
   defp current_user(conn) do
     id = Plug.Conn.get_session(conn, :user_id)
     Repo.get!(User, id)
