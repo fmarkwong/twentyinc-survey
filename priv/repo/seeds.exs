@@ -18,9 +18,11 @@ for schema <- [Answer, Choice, Question, Quiz, User] do
   Repo.delete_all schema
 end
 
-Repo.insert! %User{
-  name: "Bob"
-}
+for name <- ["Bob", "Sue"] do
+  Repo.insert! %User{
+    name: name 
+  }
+end
 
 # Quiz 1 ########################################################3
 

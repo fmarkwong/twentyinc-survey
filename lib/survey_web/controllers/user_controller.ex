@@ -16,11 +16,13 @@ defmodule SurveyWeb.UserController do
 
   def login_form(conn, _params) do
     changeset = Accounts.change_user(%User{})
-    render(conn, "login_form.html", changeset: changeset)
+    users = Accounts.list_users()
+
+    render(conn, "login_form.html", changeset: changeset, users: users)
   end
 
-  def login_user(conn, %{"name" => name}) do
-    user = Survey.Repo.get_by!(User, name: name)
+  def login_user(conn, %{"id" => id}) do
+    user = Survey.Repo.get!(User, id)
     conn = Plug.Conn.put_session(conn, :user_id, user.id)
 
     redirect(conn, to: Routes.quiz_path(conn, :index))
@@ -31,7 +33,7 @@ defmodule SurveyWeb.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User created successfully.")
-        |> redirect(to: Routes.user_path(conn, :show, user))
+        |> redirect(to: Routes.user_path(conn, :login_form))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

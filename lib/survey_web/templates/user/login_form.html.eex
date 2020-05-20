@@ -1,11 +1,21 @@
 <h1>Login</h1>
 
+<table>
+  <thead>
+    <tr>
+      <th>Please select a user to login as</th>
 
-<%= form_for @conn, Routes.user_path(@conn, :login_user), fn f -> %>
-  <%= label f, :user_name %>
-  <%= text_input f, :name %>
-
-  <div>
-    <%= submit "Login" %>
-  </div>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for user <- @users do %>
+    <tr>
+    <tr onclick="window.location='<%= Routes.user_path(@conn, :login_user, user) %>'">
+      <td><%= user.name %></td>
+    </tr>
 <% end %>
+  </tbody>
+</table>
+
+<span><%= link "Create New User", to: Routes.user_path(@conn, :new) %></span>

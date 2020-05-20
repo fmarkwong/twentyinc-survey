@@ -21,3 +21,5 @@
 <% end %>
   </tbody>
 </table>
+
+<span><%= link "Home", to: Routes.user_path(@conn, :login_form) %></span>

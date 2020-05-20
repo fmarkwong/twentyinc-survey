@@ -25,7 +25,7 @@ defmodule SurveyWeb.Router do
 
     resources "/users", UserController
     get "/", UserController, :login_form
-    post "/login-user", UserController, :login_user
+    get "/login-user/:id", UserController, :login_user
   end
 
   # Other scopes may use custom stacks.
