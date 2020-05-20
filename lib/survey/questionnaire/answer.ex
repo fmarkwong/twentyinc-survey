@@ -10,7 +10,7 @@ defmodule Survey.Questionnaire.Answer do
   end
 
   @doc false
-  def changeset(answer, attrs) do
+  def changeset(answer, attrs \\ %{}) do
     answer
     |> cast(attrs, [])
     |> validate_required([])

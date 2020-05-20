@@ -2,7 +2,7 @@ defmodule SurveyWeb.QuizController do
   use SurveyWeb, :controller
 
   alias Survey.Questionnaire
-  alias Survey.Questionnaire.{Quiz, Question}
+  alias Survey.Questionnaire.{Answer, Quiz, Question}
   alias Survey.Repo
 
   def index(conn, _params) do
@@ -17,9 +17,17 @@ defmodule SurveyWeb.QuizController do
 
   def next_question(conn, quiz) do
     current_user_id = 1 #harccoding this.  Normally would get it from session in conn
-    question = Question.next_unanswered_question_for(Question, quiz.id, current_user_id) 
-    render(conn, "next_question.html", quiz: quiz) 
+    # question = Question.next_unanswered_question_for(Question, quiz.id, current_user_id) 
+    #   |> Repo.preload(:choices)
+
+    # render(conn, "next_question.html", choices: question.choices) 
+    render(conn, "next_question.html", choices: 1) 
   end
+
+  def submit_answer do
+
+  end
+
 
   def new(conn, _params) do
     changeset = Questionnaire.change_quiz(%Quiz{})

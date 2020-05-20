@@ -7,3 +7,24 @@ tr:hover {
    cursor: pointer;
 }
 
+.radio-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-label {
+  display: inline-flex;
+  align-items: center;
+  padding:5px;
+  font-size: 14px;
+  margin: 10px;
+}
+
+input[type='radio'] {   
+    margin: 5px;
+ }
+
+.radio-submit {
+   margin-top: 10px;
+}
+
