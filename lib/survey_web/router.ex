@@ -20,8 +20,8 @@ defmodule SurveyWeb.Router do
     get "/users", UserController, :index
     get "/quizzes", QuizController, :index
     get "/start/:id", QuizController, :start
-    get "/next/:id", QuizController, :next_question
-    get "/sa", QuizController, :submit_answer
+    get "/next/:quiz_id", QuizController, :next_question
+    post "/sa/:quiz_id", QuizController, :submit_answer
   end
 
   # Other scopes may use custom stacks.

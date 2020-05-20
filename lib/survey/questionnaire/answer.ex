@@ -12,7 +12,7 @@ defmodule Survey.Questionnaire.Answer do
   @doc false
   def changeset(answer, attrs \\ %{}) do
     answer
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:choice_id])
+    |> validate_required([:user_id, :choice_id])
   end
 end
