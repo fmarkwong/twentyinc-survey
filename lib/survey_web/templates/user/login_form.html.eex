@@ -2,11 +2,7 @@
 
 <table>
   <thead>
-    <tr>
-      <th>Please select a user to login as</th>
-
-      <th></th>
-    </tr>
+    <h3>Please select a user to login as</h3>
   </thead>
   <tbody>
 <%= for user <- @users do %>
