@@ -1,19 +1,13 @@
-<%# <h1>@question.text</h1> %>
+<h1><%= @question.text %></h1>
 
 <%= form_for @conn, Routes.quiz_path(@conn, :submit_answer), fn f -> %>
   <div class="radio-container">
-    <label class="radio-label" for="answer_value_a">
-      <%= radio_button f, :answer, "value a", class: "radio-input" %>
-      Answer A
+<%= for choice <- @question.choices do %>
+    <label class="radio-label" for="answer_<%= choice.text %>">
+      <%= radio_button f, :answer, choice.text, class: "radio-input" %>
+      <%= choice.text %> 
     </label>
-    <label class="radio-label" for="answer_value_b">
-      <%= radio_button f, :answer, "value b", class: "radio-input" %>
-      Answer B
-    </label>
-    <label class="radio-label" for="answer_value_c">
-      <%= radio_button f, :answer, "value c", class: "radio-input" %>
-      Answer C
-    </label>
+<% end %>
   </div>
   <%= submit "Submit", class: "radio-submit" %>
 <% end %>

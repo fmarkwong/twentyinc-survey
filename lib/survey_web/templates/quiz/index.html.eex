@@ -3,7 +3,7 @@
 <table>
   <tbody>
 <%= for quiz <- @quizzes do %>
-  <tr onclick="">
+  <tr onclick="window.location='<%= Routes.quiz_path(@conn, :start, quiz) %>'">
       <td><img class="quiz-img" src="<%= quiz.image_url %>"</td>
       <td><%= quiz.title %></td>
       <td><%= quiz.description %></td>

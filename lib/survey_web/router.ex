@@ -19,8 +19,8 @@ defmodule SurveyWeb.Router do
     get "/", PageController, :index
     get "/users", UserController, :index
     get "/quizzes", QuizController, :index
-    get "/quizzes-start", QuizController, :start
-    get "/next", QuizController, :next_question
+    get "/start/:id", QuizController, :start
+    get "/next/:id", QuizController, :next_question
     get "/sa", QuizController, :submit_answer
   end
 
