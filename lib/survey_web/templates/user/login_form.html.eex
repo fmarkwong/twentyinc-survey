@@ -1,0 +1,11 @@
+<h1>Login</h1>
+
+
+<%= form_for @conn, Routes.user_path(@conn, :login_user), fn f -> %>
+  <%= label f, :user_name %>
+  <%= text_input f, :name %>
+
+  <div>
+    <%= submit "Login" %>
+  </div>
+<% end %>

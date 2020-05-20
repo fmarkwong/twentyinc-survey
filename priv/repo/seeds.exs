@@ -19,7 +19,7 @@ for schema <- [Answer, Choice, Question, Quiz, User] do
 end
 
 Repo.insert! %User{
-  name: "Bob Barker"
+  name: "Bob"
 }
 
 # Quiz 1 ########################################################3

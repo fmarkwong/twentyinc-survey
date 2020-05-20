@@ -1,5 +1,15 @@
 <h1>Quizzes</h1>
 
+<%
+  msg = case Enum.empty?(@quizzes) do
+    true -> "You've completed all the quizzes!"
+    false -> "Please select a quiz to take."
+  end
+
+%>
+
+<p>Hi <%= @current_user.name %>! <%= msg %></p>
+
 <table>
   <tbody>
 <%= for quiz <- @quizzes do %>

@@ -3,13 +3,14 @@ defmodule SurveyWeb.QuizController do
 
   alias Survey.Questionnaire
   alias Survey.Questionnaire.{Answer, Quiz, Question}
+  alias Survey.Accounts.User
   alias Survey.Repo
 
-  @current_user_id 13 #harccoding this.  Normally would get it from session in conn
-
   def index(conn, _params) do
-    quizzes = Questionnaire.list_quizzes_for_user(@current_user_id)
-    render(conn, "index.html", quizzes: quizzes)
+    current_user = current_user(conn)
+
+    quizzes = Questionnaire.list_quizzes_for_user(current_user.id)
+    render(conn, "index.html", quizzes: quizzes, current_user: current_user)
   end
 
   def start(conn, %{"id" => id}) do
@@ -17,7 +18,7 @@ defmodule SurveyWeb.QuizController do
   end
 
   def next_question(conn, %{"quiz_id" => quiz_id}) do
-    question = Question.next_unanswered_question_for(Question, String.to_integer(quiz_id), @current_user_id) 
+    question = Question.next_unanswered_question_for(Question, quiz_id, current_user(conn).id) 
       |> Repo.one()
       |> Repo.preload([:choices, :quiz])
 
@@ -32,10 +33,15 @@ defmodule SurveyWeb.QuizController do
   def submit_answer(conn, %{"quiz_id" => quiz_id, "choice_id" => choice_id}) do
     %Answer{}
     |> Ecto.Changeset.change()
-    |> Ecto.Changeset.put_change(:user_id, @current_user_id)
+    |> Ecto.Changeset.put_change(:user_id, current_user(conn).id)
     |> Answer.changeset(%{choice_id: choice_id})
     |> Repo.insert()
 
     redirect(conn, to: Routes.quiz_path(conn, :next_question, quiz_id))
+  end
+
+  defp current_user(conn) do
+    id = Plug.Conn.get_session(conn, :user_id)
+    Repo.get!(User, id)
   end
 end
