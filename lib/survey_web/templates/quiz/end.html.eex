@@ -1,0 +1,4 @@
+<h1>Thanks for taking our quiz!</h1>
+
+
+<span><%= link "Click to go back to quiz list page", to: Routes.quiz_path(@conn, :index) %></span>
