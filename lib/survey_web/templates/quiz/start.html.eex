@@ -1,0 +1,4 @@
+<h1>You are about to take <%= @quiz.title %>!</h1>
+
+
+<span><%= link "Click to start", to: Routes.quiz_path(@conn, :next_question, @quiz) %></span>

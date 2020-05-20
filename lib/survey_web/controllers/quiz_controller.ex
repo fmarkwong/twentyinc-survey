@@ -2,12 +2,23 @@ defmodule SurveyWeb.QuizController do
   use SurveyWeb, :controller
 
   alias Survey.Questionnaire
-  alias Survey.Questionnaire.Quiz
+  alias Survey.Questionnaire.{Quiz, Question}
+  alias Survey.Repo
 
   def index(conn, _params) do
     current_user_id = 1 #harccoding this.  Normally would get it from session in conn
     quizzes = Questionnaire.list_quizzes_for_user(current_user_id)
     render(conn, "index.html", quizzes: quizzes)
+  end
+
+  def start(conn, %{"id" => id}) do
+    render(conn, "start.html", quiz: Repo.get(Quiz, id))
+  end
+
+  def next_question(conn, quiz) do
+    current_user_id = 1 #harccoding this.  Normally would get it from session in conn
+    question = Question.next_unanswered_question_for(Question, quiz.id, current_user_id) 
+    render(conn, "next_question.html", quiz: quiz) 
   end
 
   def new(conn, _params) do

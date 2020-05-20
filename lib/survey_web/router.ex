@@ -19,6 +19,7 @@ defmodule SurveyWeb.Router do
     get "/", PageController, :index
     get "/users", UserController, :index
     get "/quizzes", QuizController, :index
+    get "/quizzes-start", QuizController, :start
   end
 
   # Other scopes may use custom stacks.
