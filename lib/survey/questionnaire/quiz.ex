@@ -20,13 +20,15 @@ defmodule Survey.Questionnaire.Quiz do
   end
 
   def not_completed_for(query, user_id) do
-    from quiz in query,
+    inner_query =
+      from quiz in query,
       join: question in assoc(quiz, :questions),
       join: choice in assoc(question, :choices),
       left_join: answer in assoc(choice, :answers),
-      where: is_nil(answer.id),
-      or_where: fragment("? is DISTINCT FROM ?", answer.user_id, ^user_id),
-      group_by: quiz.id,
-      order_by: quiz.id
+      distinct: quiz.id,
+      where: answer.user_id == ^user_id,
+      or_where: is_nil(answer.id),
+      group_by: [quiz.id, question.id],
+      having: count(answer.id) == 0
   end
 end

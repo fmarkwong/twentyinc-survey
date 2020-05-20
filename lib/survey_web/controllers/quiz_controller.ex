@@ -5,7 +5,7 @@ defmodule SurveyWeb.QuizController do
   alias Survey.Questionnaire.{Answer, Quiz, Question}
   alias Survey.Repo
 
-  @current_user_id 8 #harccoding this.  Normally would get it from session in conn
+  @current_user_id 10 #harccoding this.  Normally would get it from session in conn
 
   def index(conn, _params) do
     quizzes = Questionnaire.list_quizzes_for_user(@current_user_id)
